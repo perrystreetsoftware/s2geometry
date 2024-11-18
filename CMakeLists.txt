@@ -406,6 +406,15 @@ install(FILES src/s2/util/units/length-units.h
 install(TARGETS s2 DESTINATION lib)
 
 message("GTEST_ROOT: ${GTEST_ROOT}")
+
+if (GTEST_ROOT OR BUILD_EXAMPLES)
+        add_library(s2testing STATIC
+                src/s2/s2builderutil_testing.cc
+                src/s2/s2shapeutil_testing.cc
+                src/s2/s2testing.cc)
+        install(TARGETS s2testing DESTINATION lib)
+endif()
+
 if (GTEST_ROOT)
   add_subdirectory(${GTEST_ROOT} build_gtest)
   include_directories(${GTEST_ROOT}/include)
